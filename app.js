@@ -76,8 +76,9 @@ function searchByName(people){
 
 function searchByGender(people){
   let gender = promptFor("What is the person's gender", chars);
+
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.gender === gender){
       return true;
     }
     else{
@@ -93,8 +94,9 @@ function searchByGender(people){
 
 function searchByDateOfBirth(people){
   let dob = promptFor("What is the person's date of birth?", chars);
+
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.dob === dob){
       return true;
     }
     else{
@@ -110,7 +112,7 @@ function searchByDateOfBirth(people){
 function searchByHeight(people){
   let height = promptFor("What is the person's height?", chars);
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.height === height){
       return true;
     }
     else{
@@ -125,8 +127,9 @@ function searchByHeight(people){
 
 function searchByWeight(people){
   let weight = promptFor("What is the person's weight?", chars);
+
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.weight === weight){
       return true;
     }
     else{
@@ -142,7 +145,7 @@ function searchByWeight(people){
 function searchByWeight(people){
   let eyeColor = promptFor("What is the person's eye color?", chars);
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.eyeColor === eyeColor){
       return true;
     }
     else{
@@ -157,8 +160,9 @@ function searchByWeight(people){
 
 function searchByOccupation(people){
   let occupation = promptFor("What is the person's occupation", chars);
+
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.occupation === occupation){
       return true;
     }
     else{
@@ -173,8 +177,9 @@ function searchByOccupation(people){
 
 function searchByParents(people){
   let parents = promptFor("Who is the person's parents?", chars);
+
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.parents === parents){
       return true;
     }
     else{
@@ -191,7 +196,24 @@ function searchByParents(people){
 function searchByCurrentSpouse(people){
   let currentSpouse = promptFor("Who is the person's current spouse?", chars);
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.currentSpouse === currentSpouse){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundPerson;
+}
+
+// search by ID
+
+function searchById(people){
+  let id = promptFor("What is this person's ID", chars);
+
+  let foundPerson = people.filter(function(person){
+    if(person.id === id){
       return true;
     }
     else{
