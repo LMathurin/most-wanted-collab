@@ -1,64 +1,68 @@
-"use strict"
+"use strict";
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
 // app is the function called to start the entire application
-function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  let searchResults;
-  switch(searchType){
-    case 'yes':
-      searchResults = searchByName(people);
-      break;
-    case 'no':
-      searchResults = searchByTraits(people);
-      break;
-      default:
-    app(people); // restart app
-      break;
+  function app(people){
+    let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
+    let searchResults;
+    switch(searchType){
+      case 'yes':
+        searchResults = searchByName(people);
+        break;
+      case 'no':
+        searchResults = searchByTraits(people);
+        break;
+        default:
+      app(people); // restart app
+        break;
+    }
+  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+  mainMenu(searchResults, people);
   }
+
 
 function searchByTraits(people){
   let searchResults;
   let response = false;
   while(response == false){
-  prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
+  let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
  
   switch(userInput){
     case '1':
       searchResults = searchById(people);
       break;
-    case '2':
-      searchResults = searchByGender(people);
-      break;
-    case '3':
-      searchResults = searchByDateOfBirth(people);
-      break;
-    case '4':
-      searchResults = searchByHeight(people);
-      break;
-    case '5':
-      searchResults = searchByWeight(people);
-      break;
-    case '6':
-      searchResults = searchByEyeColor(people);
-      break;
-    case '7':
-      searchResults = searchByOccupation(people);
-      break;
-    case '8':
-      searchResults = searchByParents(people);
-      break;
-    case '9':
-      searchResults = searchByCurrentSpouse(people);
-      break;
-    case '10':
-      console.log('Done');
-      console.log(searchResults);
-      return searchResults;
-  default:
-    return app(people); // restarts app
+  //   case '2':
+  //     searchResults = searchByGender(people);
+  //     break;
+  //   case '3':
+  //     searchResults = searchByDateOfBirth(people);
+  //     break;
+  //   case '4':
+  //     searchResults = searchByHeight(people);
+  //     break;
+  //   case '5':
+  //     searchResults = searchByWeight(people);
+  //     break;
+  //   case '6':
+  //     searchResults = searchByEyeColor(people);
+  //     break;
+  //   case '7':
+  //     searchResults = searchByOccupation(people);
+  //     break;
+  //   case '8':
+  //     searchResults = searchByParents(people);
+  //     break;
+  //   case '9':
+  //     searchResults = searchByCurrentSpouse(people);
+  //     break;
+  //   case '10':
+  //     console.log('Done');
+  //     console.log(searchResults);
+  //     return searchResults;
+  // default:
+  //   return app(people); // restarts app
   }
 
   if(searchResults.length == 1 ){
@@ -70,9 +74,7 @@ function searchByTraits(people){
     return app(people); //restart app
   }
 }
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
-}
+} 
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -306,5 +308,4 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
-}
 }
