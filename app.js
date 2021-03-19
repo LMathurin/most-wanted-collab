@@ -12,7 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchResult = searchByTraits(people);
+      searchResults = searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -20,10 +20,11 @@ function app(people){
   }
 
 function searchByTraits(people){
-  let choice = false;
   let searchResults;
-  while(choice == false){
-  let userInput = prompt('Enter: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
+  let response = false;
+  while(response == false){
+  prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
+ 
   switch(userInput){
     case '1':
       searchResults = searchById(people);
@@ -52,10 +53,22 @@ function searchByTraits(people){
     case '9':
       searchResults = searchByCurrentSpouse(people);
       break;
+    case '10':
+      console.log('Done');
+      console.log(searchResults);
+      return searchResults;
   default:
-  app(people);
-  break;
-  } 
+    return app(people); // restarts app
+  }
+
+  if(searchResults.length == 1 ){
+
+    return searchResults;
+  }
+  else if(searchResults.length == 0){
+
+    return app(people); //restart app
+  }
 }
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
