@@ -7,7 +7,6 @@ Build all of your functions for displaying and gathering information below (GUI)
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
-  let searchByTraits;
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
@@ -19,7 +18,45 @@ function app(people){
     app(people); // restart app
       break;
   }
-  
+
+function searchByTraits(people){
+  let choice = false;
+  let searchResults;
+  while(choice == false){
+  let userInput = prompt('Enter: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
+  switch(userInput){
+    case '1':
+      searchResults = searchById(people);
+      break;
+    case '2':
+      searchResults = searchByGender(people);
+      break;
+    case '3':
+      searchResults = searchByDateOfBirth(people);
+      break;
+    case '4':
+      searchResults = searchByHeight(people);
+      break;
+    case '5':
+      searchResults = searchByWeight(people);
+      break;
+    case '6':
+      searchResults = searchByEyeColor(people);
+      break;
+    case '7':
+      searchResults = searchByOccupation(people);
+      break;
+    case '8':
+      searchResults = searchByParents(people);
+      break;
+    case '9':
+      searchResults = searchByCurrentSpouse(people);
+      break;
+  default:
+  app(people);
+  break;
+  } 
+}
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -62,6 +99,23 @@ function searchByName(people){
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundPerson;
+}
+
+// search by ID
+
+function searchById(people){
+  let id = promptFor("What is this person's ID", chars);
+
+  let foundPerson = people.filter(function(person){
+    if(person.id === id){
       return true;
     }
     else{
@@ -142,7 +196,7 @@ function searchByWeight(people){
 
 // search by eyeColor
 
-function searchByWeight(people){
+function searchByEyeColor(people){
   let eyeColor = promptFor("What is the person's eye color?", chars);
   let foundPerson = people.filter(function(person){
     if(person.eyeColor === eyeColor){
@@ -207,24 +261,6 @@ function searchByCurrentSpouse(people){
   return foundPerson;
 }
 
-// search by ID
-
-function searchById(people){
-  let id = promptFor("What is this person's ID", chars);
-
-  let foundPerson = people.filter(function(person){
-    if(person.id === id){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
-  // TODO: find the person using the name they entered
-  return foundPerson;
-}
-
-
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -257,4 +293,5 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
 }
