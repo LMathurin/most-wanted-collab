@@ -23,58 +23,6 @@ Build all of your functions for displaying and gathering information below (GUI)
   }
 
 
-function searchByTraits(people){
-  let searchResults;
-  let response = false;
-  while(response == false){
-  let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
- 
-  switch(userInput){
-    case '1':
-      searchResults = searchById(people);
-      break;
-  //   case '2':
-  //     searchResults = searchByGender(people);
-  //     break;
-  //   case '3':
-  //     searchResults = searchByDateOfBirth(people);
-  //     break;
-  //   case '4':
-  //     searchResults = searchByHeight(people);
-  //     break;
-  //   case '5':
-  //     searchResults = searchByWeight(people);
-  //     break;
-  //   case '6':
-  //     searchResults = searchByEyeColor(people);
-  //     break;
-  //   case '7':
-  //     searchResults = searchByOccupation(people);
-  //     break;
-  //   case '8':
-  //     searchResults = searchByParents(people);
-  //     break;
-  //   case '9':
-  //     searchResults = searchByCurrentSpouse(people);
-  //     break;
-  //   case '10':
-  //     console.log('Done');
-  //     console.log(searchResults);
-  //     return searchResults;
-  // default:
-  //   return app(people); // restarts app
-  }
-
-  if(searchResults.length == 1 ){
-
-    return searchResults;
-  }
-  else if(searchResults.length == 0){
-
-    return app(people); //restart app
-  }
-}
-} 
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -123,6 +71,43 @@ function searchByName(people){
   // TODO: find the person using the name they entered
   return foundPerson;
 }
+
+
+// alerts a list of people
+function displayPeople(people){
+  alert(people.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+}
+
+function displayPerson(person){
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  let personInfo = "First Name: " + person.firstName + "\n";
+  personInfo += "Last Name: " + person.lastName + "\n";
+  // TODO: finish getting the rest of the information to display
+  alert(personInfo);
+}
+
+// function that prompts and validates user input
+function promptFor(question, valid){
+  do{
+    var response = prompt(question).trim();
+  } while(!response || !valid(response));
+  return response;
+}
+
+// helper function to pass into promptFor to validate yes/no answers
+function yesNo(input){
+  return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
+}
+
+// helper function to pass in as default promptFor validation
+function chars(input){
+  return true; // default validation only
+}
+
+
 
 // search by ID
 
@@ -276,36 +261,56 @@ function searchByCurrentSpouse(people){
   return foundPerson;
 }
 
-// alerts a list of people
-function displayPeople(people){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
-}
 
-function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
-  alert(personInfo);
-}
+function searchByTraits(people){
+  let searchResults;
+  let response = false;
+  while(response == false){
+  let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
+ 
+  switch(userInput){
+    case '1':
+      searchResults = searchById(people);
+      break;
+    case '2':
+      searchResults = searchByGender(people);
+      break;
+    case '3':
+      searchResults = searchByDateOfBirth(people);
+      break;
+    case '4':
+      searchResults = searchByHeight(people);
+      break;
+    case '5':
+      searchResults = searchByWeight(people);
+      break;
+    case '6':
+      searchResults = searchByEyeColor(people);
+      break;
+    case '7':
+      searchResults = searchByOccupation(people);
+      break;
+    case '8':
+      searchResults = searchByParents(people);
+      break;
+    case '9':
+      searchResults = searchByCurrentSpouse(people);
+      break;
+    case '10':
+      console.log('Done');
+      console.log(searchResults);
+      return searchResults;
+  default:
+    return app(people); // restarts app
+  }
 
-// function that prompts and validates user input
-function promptFor(question, valid){
-  do{
-    var response = prompt(question).trim();
-  } while(!response || !valid(response));
-  return response;
-}
+  if(searchResults.length == 1 ){
 
-// helper function to pass into promptFor to validate yes/no answers
-function yesNo(input){
-  return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
-}
+    return searchResults;
+  }
+  else if(searchResults.length == 0){
 
-// helper function to pass in as default promptFor validation
-function chars(input){
-  return true; // default validation only
+    return app(people); //restart app
+  }
 }
+} 
