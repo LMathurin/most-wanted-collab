@@ -68,14 +68,7 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
-  if(foundPerson.length == 0 ){
-    return foundPerson;
-  }
-  else{
-    return app(people);
-  }
-  
+  return foundPerson[0];
 }
 
 
