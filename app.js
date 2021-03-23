@@ -75,6 +75,7 @@ function searchByName(people){
 
 
 
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -214,7 +215,7 @@ function searchByEyeColor(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson;
+  return foundPerson[foundPerson.length];
 }
 
 //search by occupation
@@ -270,7 +271,7 @@ function searchByCurrentSpouse(people){
 
 
 function searchBySingleCriterion(people){
-  let searchResults;
+  
   let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
  
   switch(userInput){
@@ -304,8 +305,8 @@ function searchBySingleCriterion(people){
     default:
       searchBySingleCriterion(people);  
   }
+  let searchResults;
 console.log('Done');
-console.log(searchResults);
 return searchResults;
   // if(searchResults.length == 1 ){
 
