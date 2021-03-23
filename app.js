@@ -12,7 +12,7 @@ Build all of your functions for displaying and gathering information below (GUI)
         searchResults = searchByName(people);
         break;
       case 'no':
-        searchResults = searchByTraits(people);
+        searchResults = searchBySingleCriterion(people);
         break;
         default:
       app(people); // restart app
@@ -71,6 +71,7 @@ function searchByName(people){
   // TODO: find the person using the name they entered
   return foundPerson;
 }
+
 
 
 // alerts a list of people
@@ -262,10 +263,8 @@ function searchByCurrentSpouse(people){
 }
 
 
-function searchByTraits(people){
+function searchBySingleCriterion(people){
   let searchResults;
-  let response = false;
-  while(response == false){
   let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
  
   switch(userInput){
@@ -296,21 +295,18 @@ function searchByTraits(people){
     case '9':
       searchResults = searchByCurrentSpouse(people);
       break;
-    case '10':
-      console.log('Done');
-      console.log(searchResults);
-      return searchResults;
-  default:
-    return app(people); // restarts app
+    default:
+      searchBySingleCriterion(people);  
   }
+console.log('Done');
+console.log(searchResults);
+return searchResults;
+  // if(searchResults.length == 1 ){
 
-  if(searchResults.length == 1 ){
+  //   return searchResults;
+  // }
+  // else if(searchResults.length == 0){
 
-    return searchResults;
-  }
-  else if(searchResults.length == 0){
-
-    return app(people); //restart app
-  }
-}
+  //   return app(people); //restart app
+  // }
 } 
