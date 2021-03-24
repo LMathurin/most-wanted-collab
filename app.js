@@ -95,6 +95,10 @@ function displayPerson(person){
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Parents: " + person.parents + "\n";
+  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
+  personInfo += "ID: " + person.id + "\n";
   
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
@@ -123,7 +127,7 @@ function chars(input){
 // search by ID
 
 function searchById(people){
-  let id = promptFor("What is this person's ID", chars);
+  let id = parseInt(promptFor("What is this person's ID", chars));
 
   let foundPerson = people.filter(function(person){
     if(person.id === id){
@@ -158,7 +162,7 @@ function searchByGender(people){
 
 
 function searchByDateOfBirth(people){
-  let dob = promptFor("What is the person's date of birth?", chars);
+  let dob = parseInt(promptFor("What is the person's date of birth?", chars));
 
   let foundPerson = people.filter(function(person){
     if(person.dob === dob){
@@ -193,7 +197,7 @@ function searchByHeight(people){
 // search by weight
 
 function searchByWeight(people){
-  let weight = promptFor("What is the person's weight?", chars);
+  let weight = parseInt(promptFor("What is the person's weight?", chars));
 
   let foundPerson = people.filter(function(person){
     if(person.weight === weight){
@@ -246,7 +250,7 @@ function searchByOccupation(people){
 //search by parents
 
 function searchByParents(people){
-  let parents = promptFor("Who is the person's parents?", chars);
+  let parents = parseInt(promptFor("Who is the person's parents?", chars));
 
   let foundPerson = people.filter(function(person){
     if(person.parents === parents){
@@ -264,7 +268,7 @@ function searchByParents(people){
 
 
 function searchByCurrentSpouse(people){
-  let currentSpouse = promptFor("Who is the person's current spouse?", chars);
+  let currentSpouse = parseInt(promptFor("Who is the person's current spouse?", chars));
   let foundPerson = people.filter(function(person){
     if(person.currentSpouse === currentSpouse){
       return true;
@@ -368,11 +372,11 @@ function searchByTraits(people) {
   let filteredSelection;
 
   let userSearchChoice = prompt("Would you like to filter the list further by another trait?");
-    if (userSearchChoice == "yes") {
+    if (userSearchChoice === "yes") {
     searchByTraits(filteredPerson, people);  
    }  
 
-    else if (userSearchInput == "no" && filteredPerson.length === 1) {
+    else if (userSearchInput === "no" && filteredPerson.length === 1) {
        filteredSelection = filteredPerson[0];
        mainMenu(foundPerson, people);
   }
