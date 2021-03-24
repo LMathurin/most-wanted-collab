@@ -331,3 +331,4 @@ function searchByTraits(people) {
   //   return app(people); //restart app
   // }
 } 
+

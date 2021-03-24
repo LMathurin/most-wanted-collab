@@ -12,7 +12,7 @@ Build all of your functions for displaying and gathering information below (GUI)
         searchResults = searchByName(people);
         break;
       case 'no':
-        searchResults = searchBySingleCriterion(people);
+        searchResults = searchByTraits(people);
         break;
         default:
       app(people); // restart app
@@ -78,10 +78,13 @@ function searchByName(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
+  return (people.map(function(person){
+  
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+//alert(people.map(function(person){
+
 
 function displayPerson(person){
   // print all of the information about a person:
@@ -172,9 +175,9 @@ function searchByDateOfBirth(people){
 // search by height
 
 function searchByHeight(people){
-  let height = promptFor("What is the person's height?", chars);
+  let height = promptFor("What is the person's height?", chars); //parsInt(promptFor("What is the person's height?", chars));
   let foundPerson = people.filter(function(person){
-    if(person.height === height){
+    if(person.height == height){
       return true;
     }
     else{
@@ -182,7 +185,8 @@ function searchByHeight(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson;
+  console.log(foundPerson)
+  return foundPerson[foundPerson.length];
 }
 
 // search by weight
@@ -269,51 +273,106 @@ function searchByCurrentSpouse(people){
   return foundPerson;
 }
 
-
-function searchBySingleCriterion(people){
+//  function searchBySingleCriterion(people){
   
-  let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
-  let searchResults = people.filter(function(person){
-    if(person.id == id && person.gender === gender && person.dateOfBirth === dateOfBirth && person.height === height && person.weight === weight && person.eyeColor === eyeColor && person.occupation === occupation && person.parents === parents && person.currentSpouse === currentSpouse){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
-  switch(userInput){
-    case '1':
-      searchResults = searchById(people);
+//   let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
+//   let searchResults = people.filter(function(person){
+//     if(person.id == id && person.gender === gender && person.dateOfBirth === dateOfBirth && person.height === height && person.weight === weight && person.eyeColor === eyeColor && person.occupation === occupation && person.parents === parents && person.currentSpouse === currentSpouse){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   })
+//   switch(userInput){
+//     case '1':
+//       searchResults = searchById(people);
+//       break;
+//     case '2':
+//       searchResults = searchByGender(people);
+//       break;
+//     case '3':
+//       searchResults = searchByDateOfBirth(people);
+//       break;
+//     case '4':
+//       searchResults = searchByHeight(people);
+//       break;
+//     case '5':
+//       searchResults = searchByWeight(people);
+//       break;
+//     case '6':
+//       searchResults = searchByEyeColor(people);
+//       break;
+//     case '7':
+//       searchResults = searchByOccupation(people);
+//       break;
+//     case '8':
+//       searchResults = searchByParents(people);
+//       break;
+//     case '9':
+//       searchResults = searchByCurrentSpouse(people);
+//       break;
+//     default:
+//       searchBySingleCriterion(people);  
+//   }
+  
+//   console.log('Done');
+//   return searchResults[searchResults.length];
+// }
+
+
+
+
+ 
+
+function searchByTraits(people) {
+  
+  let userSearchInput = prompt("Please type in below ONE of the following traits you would like to search by 'Height' , 'Weight' , 'Eye Color', 'Gender', 'Age', or 'Occupation'.").toLowerCase();
+  let filteredPerson;
+  let filteredSelection;
+
+   switch(userSearchInput) {
+    case 'height':
+      filteredPerson = searchByHeight(people);
+      alert(displayPeople(filteredPerson));
       break;
-    case '2':
-      searchResults = searchByGender(people);
+    case 'weight':
+      filteredPerson = searchByWeight(people);
+      alert(displayPeople(filteredPerson));
       break;
-    case '3':
-      searchResults = searchByDateOfBirth(people);
+    case 'eye color':
+      filteredPerson = searchByEyeColor(people);
+      alert(displayPeople(filteredPerson));
       break;
-    case '4':
-      searchResults = searchByHeight(people);
+    case 'gender':
+      filteredPerson = searchByGender(people);
+      alert(displayPeople(filteredPerson));
       break;
-    case '5':
-      searchResults = searchByWeight(people);
-      break;
-    case '6':
-      searchResults = searchByEyeColor(people);
-      break;
-    case '7':
-      searchResults = searchByOccupation(people);
-      break;
-    case '8':
-      searchResults = searchByParents(people);
-      break;
-    case '9':
-      searchResults = searchByCurrentSpouse(people);
+    case 'age':
+      filteredPerson = searchByAge(people);
+      alert(displayPeople(filteredPerson));
+       break;
+     case 'occupation':
+      filteredPerson = searchByOccupation(people);
+      alert(displayPeople(filteredPerson));  
       break;
     default:
-      searchBySingleCriterion(people);  
+      alert('You entered an invalid search type. Please try again.');
+      searchByTraits(people);
+      break;  
   }
   
-  console.log('Done');
-  return searchResults[searchResults.length];
-}
+   userSearchInput = prompt("Would you like to filter the list further by another trait?");
+    if (userSearchChoice === "yes") {
+    searchByTraits(filteredPerson, people);  
+   }  
 
+    else if (userSearchInput === "no" && filteredPerson.length === 1) {
+       filteredSelection = filteredPerson[0];
+       mainMenu(foundPerson, people);
+  }
+    else (userSearchInput === "no" && filteredPerson.length > 1);{
+      alert("We have narrowed down your search to this: \n\n" + displayPeople(filteredPerson) + "\n\n Now you can search any of these people by name");
+      app(people);
+ }
+}    
