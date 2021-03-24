@@ -273,7 +273,14 @@ function searchByCurrentSpouse(people){
 function searchBySingleCriterion(people){
   
   let userInput = prompt('Type in a number from 1-9: \n 1: To search by ID \n 2: To search by gender \n 3: To search by date of birth \n 4: To search by height \n 5: To search by weight \n 6: To search by eye color \n 7: To search by occupation \n 8: To search by parents \n 9: To search by current spouse');
- 
+  let searchResults = people.filter(function(person){
+    if(person.id == id && person.gender === gender && person.dateOfBirth === dateOfBirth && person.height === height && person.weight === weight && person.eyeColor === eyeColor && person.occupation === occupation && person.parents === parents && person.currentSpouse === currentSpouse){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
   switch(userInput){
     case '1':
       searchResults = searchById(people);
@@ -305,15 +312,8 @@ function searchBySingleCriterion(people){
     default:
       searchBySingleCriterion(people);  
   }
-  let searchResults;
-console.log('Done');
-return searchResults;
-  // if(searchResults.length == 1 ){
+  
+  console.log('Done');
+  return searchResults[searchResults.length];
+}
 
-  //   return searchResults;
-  // }
-  // else if(searchResults.length == 0){
-
-  //   return app(people); //restart app
-  // }
-} 
